@@ -18,6 +18,7 @@ package com.google.samples.apps.sunflower
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,7 @@ class PlantDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        Log.e("test", "onCreateView PlantDetailFragment")
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
             inflater,
             R.layout.fragment_plant_detail,
@@ -109,7 +110,6 @@ class PlantDetailFragment : Fragment() {
             }
         }
         setHasOptionsMenu(true)
-
         return binding.root
     }
 

@@ -36,11 +36,12 @@
             android:theme="@style/Theme.Sunflower.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+<!--        ContentProvider 앱간의 파일 및 데이터 공유, 데이터 추가, 조회, 수정 또는 삭제-->
+<!--        어떠한 앱이 다른 앱의 데이터에 접근할 때, 추가해야 한다-->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"

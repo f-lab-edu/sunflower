@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        Log.e("test", "onCreateViewHolder PlantAdapter")
         return PlantViewHolder(
             ListItemPlantBinding.inflate(
                 LayoutInflater.from(parent.context),

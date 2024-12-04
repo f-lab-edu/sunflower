@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -40,6 +41,7 @@ class PlantListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.e("test", "onCreateView PlantListFragment")
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
         context ?: return binding.root
 

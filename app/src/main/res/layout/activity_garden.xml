@@ -26,5 +26,6 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_garden" />
+<!--    앱안에서 어떻게 navigation이 이루어져야 하는지 보여준다-->
 
 </layout>

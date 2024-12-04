@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,7 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.e("test", "onCreateView GalleryFragment")
         val binding = FragmentGalleryBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
@@ -55,7 +57,6 @@ class GalleryFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener { view ->
             view.findNavController().navigateUp()
         }
-
         return binding.root
     }
 
