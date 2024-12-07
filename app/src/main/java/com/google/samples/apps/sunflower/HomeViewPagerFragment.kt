@@ -71,9 +71,9 @@ class HomeViewPagerFragment : Fragment() {
         Log.e("lifecycle", "onViewCreated $this")
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.e("lifecycle", "onActivityCreated $this")
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.e("lifecycle", "onViewStateRestored $this")
     }
 
     override fun onStart() {
