@@ -36,7 +36,6 @@ import com.google.samples.apps.sunflower.databinding.ListItemPhotoBinding
 class GalleryAdapter : PagingDataAdapter<UnsplashPhoto, GalleryViewHolder>(GalleryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
-        Log.e("test", "onCreateViewHolder GalleryAdapter")
         return GalleryViewHolder(
             ListItemPhotoBinding.inflate(
                 LayoutInflater.from(parent.context),

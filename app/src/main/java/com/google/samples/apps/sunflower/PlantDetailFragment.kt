@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -46,12 +47,25 @@ class PlantDetailFragment : Fragment() {
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels()
 
+    // [PlantList에서 PlantDetail 갈 때 6] HomeViewPagerFragment의 onStop -> onAttach
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e("lifecycle", "onAttach $this")
+    }
+
+    // [PlantList에서 PlantDetail 갈 때 7] onAttach -> onCreate
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e("lifecycle", "onCreate $this")
+    }
+
+    // [PlantList에서 PlantDetail 갈 때 8] onCreate -> onCreateView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.e("test", "onCreateView PlantDetailFragment")
+        Log.e("lifecycle", "onCreateView $this")
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
             inflater,
             R.layout.fragment_plant_detail,
@@ -113,6 +127,60 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
+    // [PlantList에서 PlantDetail 갈 때 9] onCreateView -> onViewCreated
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.e("lifecycle", "onViewCreated $this")
+    }
+
+    // [PlantList에서 PlantDetail 갈 때 10] onViewCreated -> onActivityCreated
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.e("lifecycle", "onActivityCreated $this")
+    }
+
+    // [PlantList에서 PlantDetail 갈 때 11] onActivityCreated -> onStart
+    override fun onStart() {
+        super.onStart()
+        Log.e("lifecycle", "onStart $this")
+    }
+
+    // [PlantList에서 PlantDetail 갈 때 12] onStart -> onResume
+    override fun onResume() {
+        super.onResume()
+        Log.e("lifecycle", "onResume $this")
+    }
+
+    // [PlantDetail에서 PlantList로 갈 때 1] 가장 먼저 실행
+    override fun onPause() {
+        super.onPause()
+        Log.e("lifecycle", "onPause  $this")
+    }
+
+    // [PlantDetail에서 PlantList로 갈 때 2] onPause -> onStop
+    override fun onStop() {
+        super.onStop()
+        Log.e("lifecycle", "onStop $this")
+    }
+
+    // [PlantDetail에서 PlantList로 갈 때 13] PlantListFragment의 onResume -> onDestroyView
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e("lifecycle", "onDestroyView $this")
+    }
+
+    // [PlantDetail에서 PlantList로 갈 때 14] onDestroyView -> onDestroy
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("lifecycle", "onDestroy $this")
+    }
+
+    // [PlantDetail에서 PlantList로 갈 때 15] onDestroy -> onDetach /
+    override fun onDetach() {
+        super.onDetach()
+        Log.e("lifecycle", "onDetach $this")
+    }
+
     private fun navigateToGallery() {
         plantDetailViewModel.plant.value?.let { plant ->
             val direction =
@@ -154,4 +222,5 @@ class PlantDetailFragment : Fragment() {
     fun interface Callback {
         fun add(plant: Plant?)
     }
+
 }

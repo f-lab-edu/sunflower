@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,12 +43,22 @@ class GalleryFragment : Fragment() {
     private var searchJob: Job? = null
     private val viewModel: GalleryViewModel by viewModels()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.e("lifecycle", "onAttach $this")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e("lifecycle", "onCreate $this")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.e("test", "onCreateView GalleryFragment")
+        Log.e("lifecycle", "onCreateView $this")
         val binding = FragmentGalleryBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
@@ -58,6 +69,51 @@ class GalleryFragment : Fragment() {
             view.findNavController().navigateUp()
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.e("lifecycle", "onViewCreated $this")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.e("lifecycle", "onActivityCreated $this")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("lifecycle", "onStart $this")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("lifecycle", "onResume $this")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("lifecycle", "onPause  $this")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("lifecycle", "onStop $this")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e("lifecycle", "onDestroyView $this")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("lifecycle", "onDestroy $this")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.e("lifecycle", "onDetach $this")
     }
 
     private fun search(query: String) {

@@ -37,7 +37,6 @@ class GardenPlantingAdapter :
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.e("test", "onCreateViewHolder GardenPlantingAdapter")
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),

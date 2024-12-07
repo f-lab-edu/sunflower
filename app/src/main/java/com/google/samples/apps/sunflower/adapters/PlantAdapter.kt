@@ -35,7 +35,6 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.e("test", "onCreateViewHolder PlantAdapter")
         return PlantViewHolder(
             ListItemPlantBinding.inflate(
                 LayoutInflater.from(parent.context),
