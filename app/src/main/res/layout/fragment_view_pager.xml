@@ -22,19 +22,31 @@
     <!--
      Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in HomeViewPagerFragment, they are
      both required to preserve the toolbar scroll / collapse state when navigating to a new screen and then coming back.
+     Note: CoordinatorLayout 및 AppBarLayout의 ID가 HomeViewPagerFragment에서 사용되지 않더라도
+     두 가지 모두 새 화면으로 이동했다가 돌아올 때 도구 모음 스크롤/접기 상태를 유지하는 데 필요합니다.
     -->
+
+    <!--뷰끼리 상호 작용해야 할 때 사용,
+    예를 들어 아래 View를 스크롤했는데 위의 View도 함께 스크롤되어야한다면 이를 사용
+    fitsSystemWindows : 시스템 UI(예: 상태바, 내비게이션 바)와 겹치지 않도록 View의 위치 조정-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+        <!--안드로이드의 화면 간 슬라이딩 전환을 지원
+
+        layout_behavior : appbar_scrolling_view_behavior
+        View가 스크롤하거나 다른 View와 상호작용할 때 어떤 동작을 해야 하는지 정하는 설정으로
+        스크롤 가능한 View와 AppBarLayout을 연결하여 자연스러운 축소/확장 효과를 제공 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+        <!--주로 스크롤 동작과 결합하여 툴바를 축소하거나 확장하는 효과를 구현하는 데 사용-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
@@ -42,6 +54,9 @@
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.Sunflower.AppBarOverlay">
 
+            <!--주로 스크롤에 따라 툴바가 확장하거나 축소되는 애니메이션 효과를 구현, 스크롤 동작을 더 세밀하게 제어
+            layout_scrollFlags="scroll|snap" : 스크롤하면 상단이 축소되거나 확장되고,
+            멈추면 완전히 확장된 상태 또는 완전히 축소된 상태 중 하나로 고정-->
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
@@ -49,6 +64,9 @@
                 app:layout_scrollFlags="scroll|snap"
                 app:toolbarId="@id/toolbar">
 
+                <!--Material Design의 스타일과 기능을 적용한 툴바
+                layout_collapseMode : 스크롤 동작에 반응하는 방식
+                parallax : 자식뷰가 스크롤 속도보다 느리게 움직이도록 설정-->
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -69,6 +87,8 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <!-- Override tabIconTint attribute of style with selector -->
+            <!--앱에서 탭(Tab)을 사용해 여러 화면 간에 쉽게 전환할 수 있도록 설계
+                주로 ViewPager2 또는 ViewPager와 함께 사용-->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 style="@style/Widget.MaterialComponents.TabLayout.Colored"

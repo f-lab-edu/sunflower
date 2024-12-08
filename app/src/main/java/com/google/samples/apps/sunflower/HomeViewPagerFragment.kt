@@ -32,6 +32,8 @@ import com.google.samples.apps.sunflower.databinding.FragmentViewPagerBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+// 가장먼저 실행되는 Fragment
+// ViewPager, 탭 컨테이너
 class HomeViewPagerFragment : Fragment() {
 
     override fun onAttach(context: Context) {
@@ -45,11 +47,15 @@ class HomeViewPagerFragment : Fragment() {
     }
 
     override fun onCreateView(
+        // XML에 정의된 Resource를 View 객체로 반환
         inflater: LayoutInflater,
+        // 해당 Fragment가 들어갈 컨테이너 (부모 ViewGroup에 넣어서 화면을 구성)
         container: ViewGroup?,
+        // Fragment가 이전 상태에서 복원될 때, 저장된 데이터 제공
         savedInstanceState: Bundle?
-    ): View {
+    ): View { // return 타입
         Log.e("lifecycle", "onCreateView $this")
+        // View Binding : XML 파일 이름에 따라 자동으로 클래스가 생성, findViewById 대체
         val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager

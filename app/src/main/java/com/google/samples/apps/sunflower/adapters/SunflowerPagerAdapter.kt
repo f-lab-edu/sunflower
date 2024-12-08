@@ -24,6 +24,9 @@ import com.google.samples.apps.sunflower.PlantListFragment
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
+// ViewPager2는 페이지를 fragment로 구성할 때 FragmentStateAdapter를 사용해야 한다
+// SunflowerPagerAdapter class가 FragmentStateAdapter를 상속받음
+// 부모 Fragment를 생성자로 받아, ViewPager2의 페이지를 부모 Fragment의 생명 주기에 맞게 관리
 class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     /**
