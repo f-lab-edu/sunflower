@@ -15,16 +15,24 @@
   ~ limitations under the License.
   -->
 
+<!--navigation 그래프 생성-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/view_pager_fragment">
 
+    <!--HomeViewPagerFragment 추가-->
+    <!--fragment_view_pager.xml 지정-->
     <fragment
         android:id="@+id/view_pager_fragment"
         android:name="com.google.samples.apps.sunflower.HomeViewPagerFragment"
         tools:layout="@layout/fragment_view_pager">
 
+        <!--이동할 Fragment PlantDetailFragment로 지정-->
+        <!--화면이 오른쪽에서 슬라이드되며 나타남-->
+        <!--화면이 왼쪽으로 슬라이드되며 사라짐-->
+        <!--이전 화면이 왼쪽에서 슬라이드되며 나타남-->
+        <!--화면이 오른쪽으로 슬라이드되며 사라짐-->
         <action
                 android:id="@+id/action_view_pager_fragment_to_plant_detail_fragment"
                 app:destination="@id/plant_detail_fragment"
@@ -34,6 +42,8 @@
                 app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
+    <!--PlantDetailFragment 추가-->
+    <!--fragment_plant_detail.xml 지정-->
     <fragment
         android:id="@+id/plant_detail_fragment"
         android:name="com.google.samples.apps.sunflower.PlantDetailFragment"
@@ -47,11 +57,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <!--화면 간 데이터를 전달하기 위해 사용-->
         <argument
             android:name="plantId"
             app:argType="string" />
     </fragment>
 
+    <!--GalleryFragment 추가-->
+    <!--fragment_gallery.xml 지정-->
     <fragment
         android:id="@+id/gallery_fragment"
         android:name="com.google.samples.apps.sunflower.GalleryFragment"

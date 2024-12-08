@@ -37,6 +37,7 @@ class GardenActivity : AppCompatActivity() {
         setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
         Log.d("lifecycle", "setContentView $this")
     }
+    // 액티비티가 실행되면, XML에 있는 FragmentContainerView의 navigation 그래프를 통해 HomeViewPagerFragment가 생성
 
     // Activity가 화면에 표시되기 직전에 호출, 화면에 진입할 때마다 실행되어야 하는 작업을 이곳에 구현
     override fun onStart() {

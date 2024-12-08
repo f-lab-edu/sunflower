@@ -19,6 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--Navigation Component와 통합하여 Fragment 기반 화면 전환을 쉽게 구현할 수 있는 Fragment 전용 컨테이너-->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -26,6 +27,5 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_garden" />
-<!--    앱안에서 어떻게 navigation이 이루어져야 하는지 보여준다-->
-
+        <!--defaultNavHost는 Back 버튼 이벤트를 기본 처리하도록 설정-->
 </layout>
