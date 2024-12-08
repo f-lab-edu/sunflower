@@ -17,6 +17,7 @@
 package com.google.samples.apps.sunflower
 
 import android.app.Application
+import android.util.Log
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 
@@ -34,4 +35,28 @@ class MainApplication : Application(), Configuration.Provider {
                 Configuration.Builder()
                         .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
                         .build()
+
+    // 앱이 시작될 때 한 번만 호출
+    override fun onCreate() {
+        super.onCreate()
+        Log.d("lifecycle", "onCreate $this")
+    }
+
+    // 앱 종료 시 호출
+    override fun onTerminate() {
+        super.onTerminate()
+        Log.d("lifecycle", "onTerminate $this")
+    }
+
+    // 메모리 부족 시 호출
+    override fun onLowMemory() {
+        super.onLowMemory()
+        Log.d("lifecycle", "onTerminate $this")
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        Log.d("lifecycle", "onTrimMemory $this")
+    }
+
 }

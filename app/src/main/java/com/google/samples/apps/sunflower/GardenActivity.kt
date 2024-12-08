@@ -33,8 +33,9 @@ class GardenActivity : AppCompatActivity() {
     // Activity가 생성되면 가장 먼저 호출, 단 한 번만 수행
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
         Log.d("lifecycle", "onCreate $this")
+        setContentView<ActivityGardenBinding>(this, R.layout.activity_garden)
+        Log.d("lifecycle", "setContentView $this")
     }
 
     // Activity가 화면에 표시되기 직전에 호출, 화면에 진입할 때마다 실행되어야 하는 작업을 이곳에 구현
