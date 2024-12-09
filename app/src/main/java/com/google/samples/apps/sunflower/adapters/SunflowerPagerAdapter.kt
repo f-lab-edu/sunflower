@@ -32,14 +32,21 @@ class SunflowerPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
     /**
      * Mapping of the ViewPager page indexes to their respective Fragments
      */
+    // mapOf => 변경이 불가능한 Immutable Map 생성
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         MY_GARDEN_PAGE_INDEX to { GardenFragment() },
+        // 키 0에 값으로 GardenFragment를 생성하는 람다 함수를 저장
         PLANT_LIST_PAGE_INDEX to { PlantListFragment() }
+        // 키 1에 값으로 PlantListFragment를 생성하는 람다 함수를 저장
     )
 
+    // map의 크기, fragment의 개수 return
     override fun getItemCount() = tabFragmentsCreators.size
 
+    // ViewPager2에서 각 페이지에 표시할 Fragment를 생성
     override fun createFragment(position: Int): Fragment {
+        // ?.invoke() => null이 아닌 경우에만 람다를 호출하고, null이라면 호출하지 않고 null을 return
         return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
+        // ?: => 값이 null이면 throw처리
     }
 }
