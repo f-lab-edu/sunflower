@@ -19,18 +19,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--data binding 사용 hasPlantings boolean값을 통해 UI 변경-->
     <data>
-
         <variable
                 name="hasPlantings"
                 type="boolean" />
-
     </data>
 
+    <!--여러 자식 뷰를 위로 쌓아 올리는 방식으로 배치
+    배경 이미지와 그 위에 텍스트를 올리는 경우 사용-->
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <!--스크롤 가능한 목록을 표시하는 데 사용
+        스크롤 시 화면에 보이지 않는 항목의 뷰를 재사용
+
+        clipTopadding=false: 컨텐츠가 패딩 영역을 넘어 스크롤된다.
+        isGone=true면 안보임 false면 보임 hasPlantings가 false면 안보임
+        StaggeredGridLayoutManager : 격자 형태의 레이아웃, 수직 or 수평 방향 스크롤 가능
+        이미지나 카드 형태의 데이터가 다양한 크기를 가질 때 사용
+        spanCount : 한 행에 몇 개의 아이템을 배치 할 건지
+        listitem : 각 아이템에 사용할 레이아웃 파일
+        -->
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/garden_list"
                 android:layout_width="match_parent"
@@ -44,6 +55,10 @@
                 app:spanCount="@integer/grid_columns"
                 tools:listitem="@layout/list_item_garden_planting"/>
 
+        <!--여러 자식 뷰를 세로 또는 가로로 배치
+        gravity="center" : 자식 뷰 중앙 배치
+        orientation="vertical": 자식 뷰들이 세로 방향으로 배치
+        -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

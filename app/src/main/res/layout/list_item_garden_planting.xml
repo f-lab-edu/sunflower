@@ -18,6 +18,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--Data Binding에 필요한 데이터 정의-->
     <data>
         <variable
             name="clickListener"
@@ -27,6 +28,8 @@
             type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
     </data>
 
+    <!--커스텀 카드 뷰 버튼 클릭 이벤트를 처리하기 위한 리스너,
+    카드의 그림자 깊이를 설정, 카드 모서리 모양 설정-->
     <com.google.samples.apps.sunflower.views.MaskedCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,6 +41,8 @@
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
 
+        <!--자식 뷰들을 자유롭게 배치할 수 있다.
+        각 뷰는 부모 뷰나 다른 뷰에 대해 제약 조건을 설정하여 위치를 조정-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

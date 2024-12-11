@@ -39,6 +39,7 @@ class GardenFragment : Fragment() {
     // lateinit => 변수 값을 나중에 초기화한다고 명시하는 것, 변수의 첫 상태를 정의하기 어려울 때 사용, null 값을 가질 수 없다
     // : => 변수의 타입을 지정
     // FragmentGardenBinding => fragment_garden.xml
+    // 초기값 없이 변수의 타입만 지정, 다른 메서드에서도 접근할 수 있도록
     private lateinit var binding: FragmentGardenBinding
     private val viewModel: GardenPlantingListViewModel by viewModels()
 

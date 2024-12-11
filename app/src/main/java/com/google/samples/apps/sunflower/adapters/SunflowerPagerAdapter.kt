@@ -21,6 +21,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.samples.apps.sunflower.GardenFragment
 import com.google.samples.apps.sunflower.PlantListFragment
 
+// 컴파일 시점에 값이 결정되는 상수
 const val MY_GARDEN_PAGE_INDEX = 0
 const val PLANT_LIST_PAGE_INDEX = 1
 
