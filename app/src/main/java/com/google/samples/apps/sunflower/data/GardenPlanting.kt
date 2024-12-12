@@ -30,11 +30,24 @@ import java.util.Calendar
  *
  * Declaring the column info allows for the renaming of variables without implementing a
  * database migration, as the column name would not change.
+ *
+ * [GardenPlanting]은 사용자가 [Plant]를 자신의 정원에 추가했을 때의 정보를 나타내며, 유용한 메타데이터를 포함합니다.
+ * 예를 들어, [lastWateringDate]와 같은 속성은 식물에 물을 줘야 하는 시기 등의 알림에 사용됩니다.
+ *
+ * 열 정보를 선언하면, 변수 이름을 변경하더라도 데이터베이스 마이그레이션을 구현하지 않아도 됩니다.
+ * 이는 열 이름이 변경되지 않기 때문입니다.
  */
+
+// 데이터베이스의 테이블 정의
+// 저장하고 싶은 속성의 변수 이름과 타입을 정해준다
 @Entity(
-    tableName = "garden_plantings",
-    foreignKeys = [
-        ForeignKey(entity = Plant::class, parentColumns = ["id"], childColumns = ["plant_id"])
+    tableName = "garden_plantings", // 이 테이블의 이름
+    foreignKeys = [ // 다른 테이블과의 관계 설정
+        ForeignKey( // Plant 확인필요
+            entity = Plant::class,
+            parentColumns = ["id"],
+            childColumns = ["plant_id"]
+        )
     ],
     indices = [Index("plant_id")]
 )

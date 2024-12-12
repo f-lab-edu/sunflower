@@ -25,10 +25,14 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * The Data Access Object for the [GardenPlanting] class.
+ * [GardenPlanting] 클래스에 대한 데이터 액세스 객체입니다.
  */
 @Dao
+// Data Access Object
+// 데이터에 접근할 수 있는 메서드를 정의해놓은 인터페이스
+
 interface GardenPlantingDao {
-    @Query("SELECT * FROM garden_plantings")
+    @Query("SELECT * FROM garden_plantings") // GardenPlanting 확인필요
     fun getGardenPlantings(): Flow<List<GardenPlanting>>
 
     @Query("SELECT EXISTS(SELECT 1 FROM garden_plantings WHERE plant_id = :plantId LIMIT 1)")

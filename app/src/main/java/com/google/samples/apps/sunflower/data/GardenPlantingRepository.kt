@@ -20,8 +20,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
+// 단 하나의 인스턴스만 생성되며, 여러 컴포넌트에서 재사용 가능
+
 class GardenPlantingRepository @Inject constructor(
-    private val gardenPlantingDao: GardenPlantingDao
+    private val gardenPlantingDao: GardenPlantingDao // GardenPlantingDao 확인필요
 ) {
 
     suspend fun createGardenPlanting(plantId: String) {

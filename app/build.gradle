@@ -86,6 +86,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+    // ViewModel 의존성 추가
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     // Navigation Component 라이브러리 추가
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
