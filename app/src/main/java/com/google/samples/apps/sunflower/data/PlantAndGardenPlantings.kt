@@ -20,6 +20,9 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 // [Plant와 GardenPlanting 테이블 간의 관계를 정의하고 데이터를 묶음]
+// [정원에 심은 식물에 대한 종합 정보]
+// DB 테이블은 아닌 걸까 ? Room에서 제공하는 @Relation 기능을 활용한 데이터 묶음 클래스다
+// 실제 데이터는 여전히 Plant와 GardenPlanting 테이블에 각각 저장된다
 
 /**
  * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is
