@@ -22,19 +22,23 @@ import androidx.room.PrimaryKey
 import java.util.Calendar
 import java.util.Calendar.DAY_OF_YEAR
 
-@Entity(tableName = "plants") // plants라는 데이터베이스 테이블 정의
-data class Plant(
-    // plantId라는 속성이 기본 키다, 같은 값을 가진 항목이 없도록 보장
-    // plantId라는 속성을 DB에 "id"로 저장
-    // 각각의 속성 저장
+// [DB 안에 들어가는 식물 데이터 테이블]
+
+// @Entity => Room 데이터베이스의 테이블과 매핑
+@Entity(tableName = "plants") // "plants"라는 데이터베이스 테이블 정의
+data class Plant( // data class란 ? 데이터 저장을 위한 클래스를 간결하게 정의
+    // @PrimaryKey => plantId라는 속성이 기본 키다, 같은 값을 가진 항목이 없도록 보장한다
+    // @ColumnInfo(name = "id") => plantId라는 속성을 DB에 "id"로 저장, 기본적으로 속성 이름과 동일하게 저장하지만 다른 이름으로 저장하고 싶을 때 사용
     @PrimaryKey @ColumnInfo(name = "id") val plantId: String,
+
+    // 각각의 속성들
     val name: String,
     val description: String,
     val growZoneNumber: Int,
     val wateringInterval: Int = 7, // how often the plant should be watered, in days
     val imageUrl: String = ""
 ) {
-
+    // 메소드를 왜 data class에 만들까 ? data와 data를 다루는 로직을 한곳에 묶어두기 위해서
     /**
      * Determines if the plant should be watered.  Returns true if [since]'s date > date of last
      * watering + watering Interval; false otherwise.
