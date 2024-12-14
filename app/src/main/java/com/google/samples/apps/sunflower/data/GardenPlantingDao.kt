@@ -23,7 +23,8 @@ import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
-// [정원에 심어진 식물에 대한 정보(데이터)를 조회, 추가, 삭제]
+// [정원에 심어진 식물에 대한 정보(데이터)를 조회, 추가, 삭제하는 작업을 정의]
+// GardenPlantingRepository가 Dao를 통해 데이터 작업을 처리하므로 해당 클래스의 설명 수정필요
 
 /**
  * The Data Access Object for the [GardenPlanting] class.
