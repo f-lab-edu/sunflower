@@ -85,6 +85,12 @@ class GardenPlantingAdapter : ListAdapter<PlantAndGardenPlantings, GardenPlantin
         // plantId를 통해 식물 세부 정보 화면으로 이동
         private fun navigateToPlant(plantId: String, view: View) {
             val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
+            // 무슨 메소드 ?
+            // Jetpack Navigation Component는 앱 내의 화면 간 전환을 쉽게 관리하도록 도와주는 라이브러리
+            // HomeViewPagerFragmentDirections => navigation_graph.xml에 정의된 Action을 통해 자동 생성
+            // plantId를 받아서 어떻게 처리하나 ? navigation_graph.xml에 plantId라는 인자를 전달하도록 정의함
+            // direction 이란? Action을 호출하고 매개변수를 전달하기 위해 생성된 객체
+            // 화면 간 전환 정보를 담고 있고, 필요시 데이터를 인자로 전달할 수 있다
             view.findNavController().navigate(direction)
         }
 
