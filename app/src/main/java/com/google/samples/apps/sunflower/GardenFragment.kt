@@ -161,6 +161,7 @@ class GardenFragment : Fragment() {
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result -> // LiveData가 업데이트될 때마다 호출되는 람다 함수
+            Log.e("data", "LiveData update $this")
             // Fragment의 생명 주기를 감지하여 UI를 업데이트
             // observe => 데이터가 변경될 때마다 observe 블록 내부의 코드가 실행된다
             // viewLifecycleOwner => Fragment가 활성화된 상태일 때만 변경 사항을 감지

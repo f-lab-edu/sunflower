@@ -16,8 +16,10 @@
 
 package com.google.samples.apps.sunflower.data
 
+import android.util.Log
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
 
 // [GardenPlanting 테이블과 관련된 데이터 추가, 삭제, 조회]
 
@@ -80,10 +82,11 @@ class GardenPlantingRepository @Inject constructor(
 //        return gardenPlantingDao.isPlanted(plantId)
 //    }
 
-    fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
+    //fun getPlantedGardens() = gardenPlantingDao.getPlantedGardens()
     // 정원에 심어진 식물 정보들 return
 
-//    fun getPlantedGardens(): Flow<List<PlantAndGardenPlantings>> {
-//        return gardenPlantingDao.getPlantedGardens()
-//    }
+    fun getPlantedGardens(): Flow<List<PlantAndGardenPlantings>> {
+        Log.e("data", "getPlantedGardens $this")
+        return gardenPlantingDao.getPlantedGardens()
+    }
 }
