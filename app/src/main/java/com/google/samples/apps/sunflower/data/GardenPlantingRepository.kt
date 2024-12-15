@@ -38,6 +38,9 @@ class GardenPlantingRepository @Inject constructor(
     // private으로 설정하면 DAO를 오직 Repository 내부에서만 사용할 수 있게 제한되지만
     // internal을 사용하면 같은 모듈 내 다른 클래스에서도 gardenPlantingDao에 접근 가능하다
     // Repository를 거치지 않고 ViewModel에서 DAO를 직접 호출하는 코드가 생길 수 있다
+
+    // GardenPlantingRepository의 생성자에는 internal을 쓰지 않은 이유는?
+    // 여러 ViewModel이나 다른 계층에서 공통적으로 사용될수 있기 때문에
     private val gardenPlantingDao: GardenPlantingDao
 ) {
     // 인터페이스 구현은? 어떻게 interface 메소드를 아래와 같이 사용하는 걸까?

@@ -41,6 +41,11 @@ import javax.inject.Inject
 // 어노테이션이 생성자에 적용될 때는 constructor를 명시해야 한다
 // Hilt가 GardenPlantingRepository 객체를 생성하고 ViewModel에 전달
 class GardenPlantingListViewModel @Inject internal constructor(gardenPlantingRepository: GardenPlantingRepository) : ViewModel() {
+    // visibility modifier(private, internal 같은)가 class 앞에 붙은거랑, constructor 앞에 붙은 거랑은 다릅니다. 어떻게 다를까요?
+    // 생성자에 internal을 붙이면 해당 클래스의 인스턴스를 같은 모듈 내에서만 생성 가능하다
+    // 외부 모듈에서 ViewModel을 직접 생성할 필요가 없고, Hilt(ViewModelProvider)에 의한 생성만 허용한다
+    // 클래스 앞에 제어자는 해당 클래스의 접근 권한을 부여하는 거고 생성자 앞에 제어자는 인스턴스 생성 권한을 부여하는 것이다
+
     // private로 선언하지 않고 internal로 한 이유는?
     // ViewModel은 주로 같은 모듈 내의 Activity나 Fragment에서 사용된다
     // 같은 모듈 내 테스트 코드에서는 접근 가능해야 한다
