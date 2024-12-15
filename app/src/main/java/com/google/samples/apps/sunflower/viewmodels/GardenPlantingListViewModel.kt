@@ -17,7 +17,7 @@
 package com.google.samples.apps.sunflower.viewmodels
 
 // [GardenPlantingRepository를 통해 정원에 심은 식물들 정보를 가져와서 LiveData로 변환한다]
-// 변환해서 UI에 어떻게 전달, 반영한다는 걸까? GardenFragment 확인 필요
+// 변환해서 UI에 어떻게 전달, 반영한다는 걸까? LiveData의 데이터가 변경되면 Observer가 호출된다
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
