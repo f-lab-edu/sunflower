@@ -31,6 +31,8 @@ import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+// [정원에 심은 식물 목록, add plant 누를 경우 화면 전환, LiveDate를 통해 데이터 업데이트 시 UI 자동 업데이트]
+
 @AndroidEntryPoint
 // MY GARDEN 메뉴 화면
 // Fragment 클래스를 상속받는다
@@ -41,7 +43,15 @@ class GardenFragment : Fragment() {
     // FragmentGardenBinding => fragment_garden.xml
     // 초기값 없이 변수의 타입만 지정, 다른 메서드에서도 접근할 수 있도록
     private lateinit var binding: FragmentGardenBinding
+
+    // GardenPlantingListViewModel 타입의 변수 선언
     private val viewModel: GardenPlantingListViewModel by viewModels()
+    // by viewModels() ? Fragment의 생명주기에 따라 ViewModel을 생성한다
+    // ViewModelProvider를 통해 GardenPlantingListViewModel의 인스턴스가 생성된다
+    // Fragment나 Activity가 재생성될 때마다 동일한 ViewModel 인스턴스를 반환하므로, 데이터를 유지할 수 있다
+
+    // by가 뭘까 ? 다른 객체에게 작업을 맡길 때(위임) 쓰는 키워드
+    // 어떻게 ? viewModel이라는 변수가 필요할 때마다 viewModels()가 자동으로 ViewModel을 생성하고 관리해준다
 
     // 호스트 액티비티에 연결될 때
     override fun onAttach(context: Context) {
@@ -63,14 +73,22 @@ class GardenFragment : Fragment() {
     ): View {
         Log.e("lifecycle", "onCreateView $this")
         binding = FragmentGardenBinding.inflate(inflater, container, false)
+        // View Binding을 사용하여 fragment_garden.xml을 뷰 객체로 변환하고 이를 binding 변수에 저장
+
         val adapter = GardenPlantingAdapter()
+        // GardenPlantingAdapter의 인스턴스를 생성
+
         binding.gardenList.adapter = adapter
+        // binding.gardenList(RecyclerView)에 어댑터 연결
+        // HomeViewPagerFragment 처럼 binding.gardenList.adapter = GardenPlantingAdapter()로 쓰지 않는 이유는?
+        // 어댑터를 참조하거나 추가 작업을 수행하기 어렵기 때문
 
         binding.addPlant.setOnClickListener {
             navigateToPlantListPage()
-        }
+        } // add Plant 버튼누르면 plant list page 로 이동
 
         subscribeUi(adapter, binding)
+        // LiveData를 관찰 시작
         return binding.root
     }
 
@@ -142,19 +160,30 @@ class GardenFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
+        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result -> // LiveData가 업데이트될 때마다 호출되는 람다 함수
+            // Fragment의 생명 주기를 감지하여 UI를 업데이트
+            // observe => 데이터가 변경될 때마다 observe 블록 내부의 코드가 실행된다
+            // viewLifecycleOwner => Fragment가 활성화된 상태일 때만 변경 사항을 감지
             binding.hasPlantings = result.isNotEmpty()
+            // isNotEmpty => result가 비어 있지 않으면 true가 return되고
+            // hasPlantings 값이 true로 설정됨
             adapter.submitList(result) {
-                // At this point, the content should be drawn
+                // RecyclerView의 어댑터에 새로운 데이터를 전달
+                // At this point, the content should be drawn / 이 시점에서 콘텐츠를 그려야 합니다
                 activity?.reportFullyDrawn()
+                // activity? => 현재 Fragment가 연결된 Activity
+                // reportFullyDrawn() => Activity 또는 Fragment의 UI가 완전히 표시되었음을 시스템에 알림
+                // 왜 사용하는 걸까? 성능 최적화와 데이터 분석을 위해 권장
             }
         }
     }
 
     // TODO: convert to data binding if applicable
+    // 해당되는 경우 데이터 바인딩으로 변환
     private fun navigateToPlantListPage() {
-        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
-            PLANT_LIST_PAGE_INDEX
+        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem = PLANT_LIST_PAGE_INDEX
+        // requireActivity() => 현재 Fragment가 연결된 Activity return
+        // view_pager id를 가진 ViewPager2를 찾고 현재 페이지를 1로 설정
     }
 
 }
