@@ -86,7 +86,7 @@ class GardenPlantingRepository @Inject constructor(
     // 정원에 심어진 식물 정보들 return
 
     fun getPlantedGardens(): Flow<List<PlantAndGardenPlantings>> {
-        Log.e("data", "getPlantedGardens $this")
+        Log.e("data", "getPlantedGardens")
         return gardenPlantingDao.getPlantedGardens()
     }
 }

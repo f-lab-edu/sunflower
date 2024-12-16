@@ -51,7 +51,7 @@ class GardenPlantingAdapter : ListAdapter<PlantAndGardenPlantings, GardenPlantin
     // 스크롤 시 새로운 항목이 필요 하거나 RecyclerView가 처음 생성될 때 호출
     // ViewHolder를 생성하고 XML 레이아웃 파일을 View 객체로 변환해 반환
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.e("data", "onCreateViewHolder $this")
+        Log.e("data", "onCreateViewHolder")
         return ViewHolder(
             DataBindingUtil.inflate( // Data Binding을 사용해서 XML 파일을 실제 뷰 객체로 변환
                 LayoutInflater.from(parent.context), // parent.context => 현재 RecyclerView가 위치한 Context
@@ -64,7 +64,7 @@ class GardenPlantingAdapter : ListAdapter<PlantAndGardenPlantings, GardenPlantin
 
     // ViewHolder가 화면에 표시될 때, 데이터가 변경 되었을 때, 새로운 데이터를 ViewHolder에 바인딩 할 때 호출
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.e("data", "onBindViewHolder $this")
+        Log.e("data", "onBindViewHolder")
         holder.bind(getItem(position))
         // position에 해당하는 데이터를 가져와서 ViewHolder와 데이터 연결
     }
@@ -116,12 +116,13 @@ class GardenPlantingAdapter : ListAdapter<PlantAndGardenPlantings, GardenPlantin
 private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>() {
     // 이 메소드들은 언제 어떻게 호출될까 ? submitList(newList)가 호출될 때,
     // ListAdapter가 newList를 받아 DiffUtil을 사용해서 oldList를 비교한다. 이 때 두 메서드를 호출한다
+    // submitList가 호출된다고 무조건 호출되지 않는다 처음실행시에는 oldList가 없기 때문
 
     override fun areItemsTheSame(
         oldItem: PlantAndGardenPlantings,
         newItem: PlantAndGardenPlantings
     ): Boolean {
-        Log.e("data", "areItemsTheSame $this")
+        Log.e("data", "areItemsTheSame, oldItem name = ${oldItem.plant.name}, newItem name = ${newItem.plant.name}")
         return oldItem.plant.plantId == newItem.plant.plantId
         // plantId를 비교해서 두 항목이 같은 식물인지 확인
     }
@@ -130,7 +131,7 @@ private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlan
         oldItem: PlantAndGardenPlantings,
         newItem: PlantAndGardenPlantings
     ): Boolean {
-        Log.e("data", "areContentsTheSame $this")
+        Log.e("data", "areContentsTheSame")
         return oldItem.plant == newItem.plant
         // Plant 객체의 모든 속성을 비교
     }
