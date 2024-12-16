@@ -23,6 +23,7 @@ import java.util.Locale
 // [PlantAndGardenPlantings 데이터를 UI에 필요한 형식으로 변경]
 // UI에 어떻게 데이터를 주겠다는 걸까?
 // ViewHolder가 PlantAndGardenPlantingsViewModel 객체를 생성하고 데이터 바인딩을 통해 UI와 연계된다
+// RecyclerView의 개별 아이템 데이터를 처리하는 일반 클래스 (ViewModel 상속 받지 않음)
 
 class PlantAndGardenPlantingsViewModel(plantings: PlantAndGardenPlantings) {
     private val plant = checkNotNull(plantings.plant)

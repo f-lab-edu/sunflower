@@ -76,6 +76,9 @@ class GardenPlantingAdapter : ListAdapter<PlantAndGardenPlantings, GardenPlantin
         init { // 클래스가 생성될 때 자동으로 실행되는 초기화 블록
             binding.setClickListener { view ->
                 binding.viewModel?.plantId?.let { plantId ->
+                    // plantId만 사용한다면 굳이 viewModel을 만들필요가 있나? 나머지 데이터는?
+                    // 데이터 바인딩을 통해 XML에서 데이터를 직접 활용한다
+
                     // 바인딩된 ViewModel에서 plantId를 가져온다. let은 plantId가 null이 아닐 때만 실행
                     // 클릭한 식물이 뭔지 어떻게 알고 plantId를 가져온다는 걸까?
                     // RecyclerView는 리스트의 각 항목에 데이터를 바인딩하고, 바인딩된 데이터는 해당 뷰와 연결되기 때문

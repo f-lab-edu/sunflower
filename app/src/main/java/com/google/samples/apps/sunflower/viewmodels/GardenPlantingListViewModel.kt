@@ -46,6 +46,9 @@ class GardenPlantingListViewModel @Inject internal constructor(gardenPlantingRep
     // 외부 모듈에서 ViewModel을 직접 생성할 필요가 없고, Hilt(ViewModelProvider)에 의한 생성만 허용한다
     // 클래스 앞에 제어자는 해당 클래스의 접근 권한을 부여하는 거고 생성자 앞에 제어자는 인스턴스 생성 권한을 부여하는 것이다
 
+    // ViewModel이 아닌 ViewModel()로 상속받는 이유는?
+    // Java 컴파일러에 의해 기본 생성자가 암묵적으로 추가되었고, 그 기본 생성자를 호출해야 하기 때문
+
     // private로 선언하지 않고 internal로 한 이유는?
     // ViewModel은 주로 같은 모듈 내의 Activity나 Fragment에서 사용된다
     // 같은 모듈 내 테스트 코드에서는 접근 가능해야 한다
