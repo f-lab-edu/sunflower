@@ -16,6 +16,7 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -35,10 +36,8 @@ import javax.inject.Inject
  * The ViewModel for [PlantListFragment].
  */
 @HiltViewModel
-class PlantListViewModel @Inject internal constructor(
-    plantRepository: PlantRepository,
-    private val savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class PlantListViewModel @Inject internal constructor
+    (plantRepository: PlantRepository, private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val growZone: MutableStateFlow<Int> = MutableStateFlow(
         savedStateHandle.get(GROW_ZONE_SAVED_STATE_KEY) ?: NO_GROW_ZONE
@@ -89,11 +88,15 @@ class PlantListViewModel @Inject internal constructor(
     }
 
     fun setGrowZoneNumber(num: Int) {
+        Log.e("filter", "before setGrowZoneNumber : ${growZone.value}")
         growZone.value = num
+        Log.e("filter", "after setGrowZoneNumber : ${growZone.value}")
     }
 
     fun clearGrowZoneNumber() {
+        Log.e("filter", "before clearGrowZoneNumber : ${growZone.value}")
         growZone.value = NO_GROW_ZONE
+        Log.e("filter", "after clearGrowZoneNumber : ${growZone.value}")
     }
 
     fun isFiltered() = growZone.value != NO_GROW_ZONE
