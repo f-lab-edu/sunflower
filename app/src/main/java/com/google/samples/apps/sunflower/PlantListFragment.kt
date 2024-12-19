@@ -142,6 +142,10 @@ class PlantListFragment : Fragment() {
         viewModel.plants.observe(viewLifecycleOwner) { plants ->
             adapter.submitList(plants)
         }
+
+        viewModel.searchPlants.observe(viewLifecycleOwner) { searchPlants ->
+            adapter.submitList(searchPlants)
+        }
     }
 
     private fun initSearchView() {
@@ -156,6 +160,7 @@ class PlantListFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
                     Log.e("search", "text change : $it")
+                    viewModel.setKeyWord(it)
                 }
                 return true
             }
