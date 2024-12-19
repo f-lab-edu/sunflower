@@ -23,10 +23,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:iconifiedByDefault="false" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/search_title"
+                app:backgroundTint="?attr/colorOnPrimary"
+                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Add"/>
+        </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plant_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
             android:clipToPadding="false"
             android:paddingEnd="@dimen/card_side_margin"
             android:paddingStart="@dimen/card_side_margin"
