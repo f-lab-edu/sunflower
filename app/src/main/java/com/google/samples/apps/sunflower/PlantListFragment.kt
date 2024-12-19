@@ -25,6 +25,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
@@ -34,6 +35,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PlantListFragment : Fragment() {
+
+    private lateinit var binding: FragmentPlantListBinding
 
     private val viewModel: PlantListViewModel by viewModels()
 
@@ -51,14 +54,15 @@ class PlantListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         Log.e("lifecycle", "onCreateView $this")
-        val binding = FragmentPlantListBinding.inflate(inflater, container, false)
-        context ?: return binding.root
+        binding = FragmentPlantListBinding.inflate(inflater, container, false)
+        context ?: return binding.root // context가 null 이면 binding.root을 return
+        // 왜 여기서만? 일부 시스템 상황에서 UI를 생성이나 복원하는 중 context가 null일 수 있다
 
         val adapter = PlantAdapter()
         binding.plantList.adapter = adapter
+        initSearchView()
         subscribeUi(adapter)
-
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(true) // 옵션 메뉴 사용 설정
         return binding.root
     }
 
@@ -108,7 +112,7 @@ class PlantListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_plant_list, menu)
+        inflater.inflate(R.menu.menu_plant_list, menu) // 필터 버튼 설정
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -122,19 +126,50 @@ class PlantListFragment : Fragment() {
         }
     }
 
+    private fun updateData() {
+        with(viewModel) {
+            if (isFiltered()) {
+                Log.e("filter", "isFiltered")
+                clearGrowZoneNumber()
+            } else {
+                Log.e("filter", "is not Filtered")
+                setGrowZoneNumber(9) // growZoneNumber가 9인 식물만 필터링 함
+            }
+        }
+    }
+
     private fun subscribeUi(adapter: PlantAdapter) {
         viewModel.plants.observe(viewLifecycleOwner) { plants ->
             adapter.submitList(plants)
         }
-    }
 
-    private fun updateData() {
-        with(viewModel) {
-            if (isFiltered()) {
-                clearGrowZoneNumber()
-            } else {
-                setGrowZoneNumber(9)
-            }
+        viewModel.searchPlants.observe(viewLifecycleOwner) { searchPlants ->
+            adapter.submitList(searchPlants)
         }
     }
+
+    private fun initSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    Log.e("search", "text submit : $query")
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    Log.e("search", "text change : $it")
+                    viewModel.setKeyWord(it)
+                }
+                return true
+            }
+        })
+
+        binding.buttonSearch.setOnClickListener {
+            val query = binding.searchView.query.toString()
+            Log.e("search", "ok button : $query")
+        }
+    }
+
 }
