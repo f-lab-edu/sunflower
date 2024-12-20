@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,46 +18,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/search_menu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                app:defaultQueryHint="@string/search_hint"
                 app:iconifiedByDefault="false" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorPrimary"
                 android:text="@string/search_title"
+                android:textColor="?attr/colorPrimary"
                 app:backgroundTint="?attr/colorOnPrimary"
-                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Add"/>
+                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Search" />
         </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plant_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:clipToPadding="false"
-            android:paddingEnd="@dimen/card_side_margin"
             android:paddingStart="@dimen/card_side_margin"
-            android:paddingTop="@dimen/header_margin"
+            android:paddingEnd="@dimen/card_side_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:spanCount="@integer/grid_columns"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
-            tools:listitem="@layout/list_item_plant"/>
+            tools:listitem="@layout/list_item_plant" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -151,18 +151,21 @@ class PlantListFragment : Fragment() {
     private fun initSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
+                query?.let {
                     Log.e("search", "text submit : $query")
                 }
-                return true
+                return false
+                // Returns: 리스너가 쿼리를 처리한 경우 true, SearchView가 기본 작업을 수행하도록 하려면 false
+                // false로 하는 경우 submit을 하면 text 창이 사라진다
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    Log.e("search", "text change : $it")
-                    viewModel.setKeyWord(it)
+                newText?.run {
+                    Log.e("search", "text change : $this")
+                    viewModel.setKeyWord(this)
                 }
-                return true
+                return false
+                // false로 하면 text 입력시 입력창에 x가 생긴다
             }
         })
 

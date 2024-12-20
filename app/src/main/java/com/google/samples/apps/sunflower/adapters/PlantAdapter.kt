@@ -32,9 +32,9 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
+class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {
         return PlantViewHolder(
             ListItemPlantBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -47,9 +47,9 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlantViewHolder, position: Int) {
         val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        holder.bind(plant)
         // 여기서는 타입캐스팅을 하는 이유는?
         // RecyclerView.ViewHolder는 모든 ViewHolder의 상위 타입이기 때문
         // Adapter의 타입을 PlantViewHolder를 명시하면 되는거 아닐까?
