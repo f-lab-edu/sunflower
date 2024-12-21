@@ -35,6 +35,15 @@
         <item name="cornerSizeBottomLeft">@dimen/button_corner_radius</item>
     </style>
 
+    <style name="ShapeAppearance.Sunflower.Button.Search" parent="ShapeAppearance.MaterialComponents">
+        <item name="cornerFamily">rounded</item>
+
+        <item name="cornerSizeTopLeft">@dimen/button_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/button_corner_radius</item>
+        <item name="cornerSizeBottomRight">@dimen/button_corner_radius</item>
+        <item name="cornerSizeBottomLeft">@dimen/button_corner_radius</item>
+    </style>
+
     <style
         name="ShapeAppearance.Sunflower.FAB"
         parent="ShapeAppearance.MaterialComponents.SmallComponent" />
