@@ -152,7 +152,7 @@ class PlantListFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    Log.e("search", "text submit : $query")
+                    Log.e("search", "text submit : $it")
                 }
                 return false
                 // Returns: 리스너가 쿼리를 처리한 경우 true, SearchView가 기본 작업을 수행하도록 하려면 false

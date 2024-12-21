@@ -22,33 +22,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/search_menu"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:defaultQueryHint="@string/search_hint"
+            app:iconifiedByDefault="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/plant_list"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_search"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:text="@string/search_title"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="@id/search_view"
+            app:layout_constraintBottom_toBottomOf="@id/search_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:defaultQueryHint="@string/search_hint"
-                app:iconifiedByDefault="false" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_title"
-                android:textColor="?attr/colorPrimary"
-                app:backgroundTint="?attr/colorOnPrimary"
-                app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Search" />
-        </LinearLayout>
+            app:backgroundTint="?attr/colorOnPrimary"
+            app:shapeAppearance="@style/ShapeAppearance.Sunflower.Button.Search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plant_list"
@@ -58,10 +56,10 @@
             android:paddingStart="@dimen/card_side_margin"
             android:paddingEnd="@dimen/card_side_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_menu"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
             app:spanCount="@integer/grid_columns"
             tools:context="com.google.samples.apps.sunflower.GardenActivity"
             tools:listitem="@layout/list_item_plant" />
