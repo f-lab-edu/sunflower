@@ -27,11 +27,18 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface PlantDao {
+    // ORDER BY => plants 테이블의 name 값을 기준으로 오름차순으로 정렬
     @Query("SELECT * FROM plants ORDER BY name")
     fun getPlants(): Flow<List<Plant>>
 
+    // WHERE => 테이블의 growZoneNumber와 매개변수로 받은 값이 동일한지
     @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
     fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): Flow<List<Plant>>
+
+    // WHERE name LIKE :keyWord => name에서 keyWord로 시작하는 값 선택
+    // || '%' => keyWord 뒤에 모든 문자열이 올 수 있다
+    @Query("SELECT * FROM plants WHERE name LIKE :keyWord || '%'")
+    fun getPlantsWithKeyWord(keyWord: String) : Flow<List<Plant>>
 
     @Query("SELECT * FROM plants WHERE id = :plantId")
     fun getPlant(plantId: String): Flow<Plant>
