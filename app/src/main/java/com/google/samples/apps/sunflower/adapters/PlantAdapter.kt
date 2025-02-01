@@ -32,26 +32,30 @@ import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
+class PlantAdapter : ListAdapter<Plant, PlantAdapter.PlantViewHolder>(PlantDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantViewHolder {
         return PlantViewHolder(
             ListItemPlantBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
+            // 여기서는 DataBindingUtil을 사용하지 않는이유는?
+            // 특정 데이터 타입과 특정 레이아웃만을 처리
+            // DataBindingUtil은 범용적 설계로 여러 레이아웃이나 데이터 타입을 처리할 가능성이 높은 경우 유용하다
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlantViewHolder, position: Int) {
         val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        holder.bind(plant)
+        // 여기서는 타입캐스팅을 하는 이유는?
+        // RecyclerView.ViewHolder는 모든 ViewHolder의 상위 타입이기 때문
+        // Adapter의 타입을 PlantViewHolder를 명시하면 되는거 아닐까?
     }
 
-    class PlantViewHolder(
-        private val binding: ListItemPlantBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    class PlantViewHolder(private val binding: ListItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 binding.plant?.let { plant ->
@@ -60,14 +64,8 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             }
         }
 
-        private fun navigateToPlant(
-            plant: Plant,
-            view: View
-        ) {
-            val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                    plant.plantId
-                )
+        private fun navigateToPlant(plant: Plant, view: View) {
+            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
             view.findNavController().navigate(direction)
         }
 
